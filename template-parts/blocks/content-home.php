@@ -18,8 +18,7 @@ get_header();?>
 
             <?php endwhile; ?>
             <?php endif; ?>
-            <img src="<?php echo get_template_directory_uri().'/assets/images/slider/style1/h2-1.jpg';?>" alt=""
-                title="#slide-1" />
+
         </div>
         <!-- Slide 1 -->
         <?php if ( have_rows( 'slider_info_rep' ) ) : ?>
@@ -61,27 +60,6 @@ get_header();?>
         </div>
         <?php endwhile; ?>
         <?php endif; ?>
-
-        <!-- <div id="slide-1" class="slider-direction">
-            <div class="container">
-                <div class="content-part">
-                    <span class="sl-subtitle">Construction building</span>
-                    <h1 class="sl-title">
-                        We building for
-                    </h1>
-                    <h2 class="small-title2">better <span class="bdr-big">futures</span></h2>
-                    <p class="sl-desc">
-                        Leverage agile frameworks to provide a robust synopsis for high level<br>
-                        overviews. Iterative approaches to corporate strategy.
-                    </p>
-                    <div class="slider-bottom">
-                        <a class="readon more" href="contact.html">Discover More</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Slide 2 -->
-
     </div>
 </div>
 <!-- Slider End -->
@@ -92,8 +70,12 @@ get_header();?>
         <div class="row y-middle">
             <div class="col-lg-6 md-mb-50">
                 <div class="images-part">
-                    <img src="<?php echo get_template_directory_uri().'/assets/images/about/about-2-1.jpg';?>"
-                        alt="About">
+                    <?php
+                    $image_about = get_field( 'image_about' );
+                    if ( $image_about ) : ?>
+                    <img src="<?php echo esc_url( $image_about['url'] ); ?>"
+                        alt="<?php echo esc_attr( $image_about['alt'] ); ?>" />
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="col-lg-6 pl-40 md-pl-15 pr-50 md-pr-15">
@@ -144,7 +126,6 @@ get_header();?>
 
                                 <?php endwhile; ?>
                                 <?php endif; ?>
-
                             </ul>
                         </div>
                     </div>
@@ -159,7 +140,6 @@ get_header();?>
                         <a class="readon more know" href="<?php echo esc_url( $link_url ); ?>"
                             target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
                         <?php endif; ?>
-
                     </div>
                 </div>
             </div>
@@ -190,18 +170,17 @@ get_header();?>
                 <?php if ( have_rows( 'latest_services_rep' ) ) : ?>
                 <?php while ( have_rows( 'latest_services_rep' ) ) :
 		        the_row(); ?>
-                <?php
-		        $image_icon = get_sub_field( 'image_icon' );
-		        if ( $image_icon ) : ?>
-                <img src="<?php echo esc_url( $image_icon['url'] ); ?>"
-                    alt="<?php echo esc_attr( $image_icon['alt'] ); ?>" />
-                <?php endif; ?>
+
                 <!-- start content -->
                 <div class="services-slider">
                     <div class="services-img">
                         <a href="property-maintenance.html">
-                            <img src="<?php echo get_template_directory_uri().'/assets/images/services/main-home/main-icons/service-icon2.png';?>"
-                                alt="Services">
+                            <?php
+		        $image_icon = get_sub_field( 'image_icon' );
+		        if ( $image_icon ) : ?>
+                            <img src="<?php echo esc_url( $image_icon['url'] ); ?>"
+                                alt="<?php echo esc_attr( $image_icon['alt'] ); ?>" />
+                            <?php endif; ?>
                         </a>
                     </div>
                     <div class="services-content">
@@ -229,7 +208,6 @@ get_header();?>
                                 target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?><i
                                     class="fi fi-rr-arrow-small-right"></i></a>
                             <?php endif; ?>
-
                         </div>
                     </div>
                 </div>
@@ -249,7 +227,6 @@ get_header();?>
         <div class="row y-middle">
             <div class="row">
                 <!-- start loop -->
-
                 <?php if ( have_rows( 'counter_repo' ) ) : ?>
                 <?php while ( have_rows( 'counter_repo' ) ) :
 		        the_row(); ?>
@@ -265,7 +242,6 @@ get_header();?>
                                     <?php if ( $prefix = get_sub_field( 'prefix' ) ) : ?>
                                     <?php echo esc_html( $prefix ); ?>
                                     <?php endif; ?>
-
                                 </span>
                             </div>
                             <span class="title"><?php if ( $title_count = get_sub_field( 'title_count' ) ) : ?>
@@ -291,7 +267,7 @@ get_header();?>
         </span>
         <h2 class="title">
             <?php if ( $title_project = get_field( 'title_project' ) ) : ?>
-            <?php echo esc_html( $title_project ); ?>
+            <?php echo ( $title_project ); ?>
             <?php endif; ?>
         </h2>
     </div>
@@ -326,40 +302,36 @@ get_header();?>
 		    	$link_target = $link['target'] ? $link['target'] : '_self';
 		    	?><a href="projects-single.html"><i class="fi fi-rr-arrow-small-right"></i></a>
                     <?php endif; ?>
-
                 </div>
                 <div class="project-inner">
                     <span class="category">
                         <?php
-		$link = get_sub_field( 'title_project' );
-		if ( $link ) :
-			$link_url = $link['url'];
-			$link_title = $link['title'];
-			$link_target = $link['target'] ? $link['target'] : '_self';
-			?>
+		                $link = get_sub_field( 'title_project' );
+		                if ( $link ) :
+		            	$link_url = $link['url'];
+		            	$link_title = $link['title'];
+		            	$link_target = $link['target'] ? $link['target'] : '_self';
+			            ?>
                         <a href="<?php echo esc_url( $link_url ); ?>"
                             target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a></span>
                     <?php endif; ?>
                     <?php
-                $link = get_sub_field( 'project_link_2' );
-                if ( $link ) :
-	                $link_url = $link['url'];
-	                $link_title = $link['title'];
-	              $link_target = $link['target'] ? $link['target'] : '_self';
+                      $link = get_sub_field( 'project_link_2' );
+                     if ( $link ) :
+	                 $link_url = $link['url'];
+	                 $link_title = $link['title'];
+	                 $link_target = $link['target'] ? $link['target'] : '_self';
 	                ?>
                     <h3 class="title"> <a href="<?php echo esc_url( $link_url ); ?>"
                             target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
                     </h3>
                     <?php endif; ?>
-
                 </div>
             </div>
         </div>
         <!-- end project -->
         <?php endwhile; ?>
         <?php endif; ?>
-
-
     </div>
 </div>
 <!-- Project Section End -->
@@ -370,8 +342,12 @@ get_header();?>
         <div class="row">
             <div class="col-lg-6 md-mb-50">
                 <div class="testi-img">
-                    <img src="<?php echo get_template_directory_uri().'/assets/images/testimonial/man-img.png';?>"
-                        alt="">
+                    <?php
+                        $representive_image = get_field( 'representive_image' );
+                        if ( $representive_image ) : ?>
+                    <img src="<?php echo esc_url( $representive_image['url'] ); ?>"
+                        alt="<?php echo esc_attr( $representive_image['alt'] ); ?>" />
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -390,86 +366,48 @@ get_header();?>
                     data-ipad-device="1" data-ipad-device-nav="false" data-ipad-device-dots="false"
                     data-ipad-device2="1" data-ipad-device-nav2="false" data-ipad-device-dots2="true" data-md-device="1"
                     data-md-device-nav="false" data-md-device-dots="true">
+                    <?php if ( have_rows( 'testimonial_rep' ) ) : ?>
+                    <?php while ( have_rows( 'testimonial_rep' ) ) :
+		            the_row(); ?>
                     <div class="testi-item">
                         <div class="item-content">
-                            <span><img
-                                    src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/quote.png';?>"
-                                    alt="Testimonial"></span>
-                            <p>Capitalize on low hanging fruit to identify a ballpark value added activity
-                                to beta test. Override the digital divide with additional clickthroughs from
-                                DevOps. Nanotechnology immersion along the information highway.</p>
+                            <span>
+                                <?php
+		                      $image_testi = get_sub_field( 'image_testi' );
+		                     if ( $image_testi ) : ?>
+                                <img src="<?php echo esc_url( $image_testi['url'] ); ?>"
+                                    alt="<?php echo esc_attr( $image_testi['alt'] ); ?>" />
+                                <?php endif; ?>
+                            </span>
+                            <p> <?php if ( $opinion_testi = get_sub_field( 'opinion_testi' ) ) : ?>
+                                <?php echo $opinion_testi; ?>
+                                <?php endif; ?></p>
                         </div>
                         <div class="testi-content">
                             <div class="image-wrap">
-                                <img src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/testi1.jpg';?>"
-                                    alt="Testimonial">
+
+                                <?php
+	            	             $image_two = get_sub_field( 'image_two' );
+		                          if ( $image_two ) : ?>
+                                <img src="<?php echo esc_url( $image_two['url'] ); ?>"
+                                    alt="<?php echo esc_attr( $image_two['alt'] ); ?>" />
+                                <?php endif; ?>
                             </div>
                             <div class="testi-information">
-                                <div class="testi-name">David M. Martin</div>
-                                <span class="testi-title">CEO, Pro Theme</span>
+                                <div class="testi-name">
+                                    <?php if ( $name_testi = get_sub_field( 'name_testi' ) ) : ?>
+                                    <?php echo esc_html( $name_testi ); ?>
+                                    <?php endif; ?>
+                                </div>
+                                <span class="testi-title">
+                                    <?php if ( $post_testi = get_sub_field( 'post_testi' ) ) : ?>
+                                    <?php echo esc_html( $post_testi ); ?>
+                                    <?php endif; ?></span>
                             </div>
                         </div>
                     </div>
-                    <div class="testi-item">
-                        <div class="item-content">
-                            <span><img
-                                    src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/quote.png';?>"
-                                    alt="Testimonial"></span>
-                            <p>Capitalize on low hanging fruit to identify a ballpark value added activity
-                                to beta test. Override the digital divide with additional clickthroughs from
-                                DevOps. Nanotechnology immersion along the information highway.</p>
-                        </div>
-                        <div class="testi-content">
-                            <div class="image-wrap">
-                                <img src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/testi2.jpg';?>"
-                                    alt="Testimonial">
-                            </div>
-                            <div class="testi-information">
-                                <div class="testi-name">Jessica Alba</div>
-                                <span class="testi-title">Manager</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testi-item">
-                        <div class="item-content">
-                            <span><img
-                                    src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/quote.png';?>"
-                                    alt="Testimonial"></span>
-                            <p>Capitalize on low hanging fruit to identify a ballpark value added activity
-                                to beta test. Override the digital divide with additional clickthroughs from
-                                DevOps. Nanotechnology immersion along the information highway.</p>
-                        </div>
-                        <div class="testi-content">
-                            <div class="image-wrap">
-                                <img src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/testi3.jpg';?>"
-                                    alt="Testimonial">
-                            </div>
-                            <div class="testi-information">
-                                <div class="testi-name">Abdur Rashid</div>
-                                <span class="testi-title">CEO, Brick Consulting</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testi-item">
-                        <div class="item-content">
-                            <span><img
-                                    src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/quote.png';?>"
-                                    alt="Testimonial"></span>
-                            <p>Capitalize on low hanging fruit to identify a ballpark value added activity
-                                to beta test. Override the digital divide with additional clickthroughs from
-                                DevOps. Nanotechnology immersion along the information highway.</p>
-                        </div>
-                        <div class="testi-content">
-                            <div class="image-wrap">
-                                <img src="<?php echo get_template_directory_uri().'/assets/images/testimonial/style1/testi4.jpg';?>"
-                                    alt="Testimonial">
-                            </div>
-                            <div class="testi-information">
-                                <div class="testi-name">Maria Masud</div>
-                                <span class="testi-title">Apps Developer</span>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endwhile; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -850,7 +788,9 @@ get_header();?>
         <div class="col-lg-4 contact-right-img"></div>
     </div>
     <div class="contact-map">
-        <iframe src="https://maps.google.com/maps?q=rstheme&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+        <?php if ( $google_map = get_field( 'google_map' ) ) : ?>
+        <iframe src=" <?php echo $google_map; ?>"></iframe>
+        <?php endif; ?>
     </div>
 </div>
 <!-- Contact Section End -->
